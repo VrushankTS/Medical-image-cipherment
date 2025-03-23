@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decrypt Image</title>
+</head>
+<body>
+    <h2>Decrypt Encoded File</h2>
+    
+    <input type="file" id="fileInput" accept=".pt">
+    <button onclick="uploadFile()">Decrypt</button>
+
+    <h3>Reconstructed Image:</h3>
+    <img id="outputImage" style="display:none; max-width: 500px;">
+
+    <br><br>
+    <a href="/">Go to Home</a>
+
+    <script>
+        function uploadFile() {
+            const fileInput = document.getElementById("fileInput");
+            if (fileInput.files.length === 0) {
+                alert("Please select a .pt file to upload.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            fetch("/decrypt/", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const imageUrl = URL.createObjectURL(blob);
+                const outputImage = document.getElementById("outputImage");
+                outputImage.src = imageUrl;
+                outputImage.style.display = "block";
+            })
+            .catch(error => alert("Error decrypting image"));
+        }
+    </script>
+</body>
+</html>

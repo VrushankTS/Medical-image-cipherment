@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypt Image</title>
+</head>
+<body>
+    <h2>Encrypt an Image</h2>
+    
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="uploadImage()">Encrypt</button>
+
+    <h3>Encrypted Visualization:</h3>
+    <img id="outputImage" style="display:none; max-width: 500px;">
+
+    <br><br>
+    <a href="/">Go to Home</a>
+
+    <script>
+        function uploadImage() {
+            const fileInput = document.getElementById("imageInput");
+            if (fileInput.files.length === 0) {
+                alert("Please select an image to upload.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            fetch("/encrypt/", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const imageUrl = URL.createObjectURL(blob);
+                const outputImage = document.getElementById("outputImage");
+                outputImage.src = imageUrl;
+                outputImage.style.display = "block";
+            })
+            .catch(error => alert("Error encrypting image"));
+        }
+    </script>
+</body>
+</html>
