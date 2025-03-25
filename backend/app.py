@@ -59,17 +59,13 @@ def save_encoded_features(encoded_tensor, filename):
     torch.save(encoded_tensor, save_path)
     return save_path
 
-def plot_images(original, encoded):
-    fig, axes = plt.subplots(1, 2, figsize=(8, 4))
-    axes[0].imshow(original.squeeze().cpu().numpy(), cmap="gray")
-    axes[0].set_title("Original Image")
-    axes[0].axis("off")
-    axes[1].imshow(encoded.mean(dim=0).cpu().numpy(), cmap="gray")
-    axes[1].set_title("Encoded Image")
-    axes[1].axis("off")
+def plot_encoded_image(encoded):
+    fig, ax = plt.subplots(figsize=(4, 4))  
+    ax.imshow(encoded.mean(dim=0).cpu().numpy(), cmap="gray")
+    ax.axis("off")  
 
     img_bytes = io.BytesIO()
-    plt.savefig(img_bytes, format="png")
+    plt.savefig(img_bytes, format="png", bbox_inches='tight', pad_inches=0)  
     plt.close(fig)
     img_bytes.seek(0)
     return img_bytes
@@ -81,8 +77,9 @@ async def encrypt_image_api(file: UploadFile = File(...)):
     encoded_tensor = encrypt_image(image_tensor)
     filename = f"encoded_{file.filename.split('.')[0]}"
     save_encoded_features(encoded_tensor, filename)
-    img_bytes = plot_images(image_tensor, encoded_tensor)
+    img_bytes = plot_encoded_image(encoded_tensor)  
     return StreamingResponse(img_bytes, media_type="image/png")
+
 
 def decrypt(encoded_tensor):
     with torch.no_grad():
