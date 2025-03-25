@@ -20,11 +20,6 @@ async def reconstruct(file: UploadFile = File(...)):
     input_tensor = transform(image)
     reconstructed = reconstruct_image(input_tensor)
 
-    # Compute SSIM & PSNR
-    original = np.array(image.convert("L"))  # Ensure grayscale
-    ssim_value = ssim(original, reconstructed, data_range=original.max() - original.min())
-    psnr_value = psnr(original, reconstructed, data_range=original.max() - original.min())
-
     # Save the reconstructed image using matplotlib
     fig, ax = plt.subplots(figsize=(5, 5))
     ax.imshow(reconstructed, cmap="gray")
