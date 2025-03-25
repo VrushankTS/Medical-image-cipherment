@@ -7,6 +7,7 @@ import os
 from PIL import Image
 from torchvision import transforms
 from model import MedicalImageEncryptionModel  
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
@@ -16,7 +17,13 @@ BACKEND_DIR = os.path.abspath(".")
 PROJECT_DIR = os.path.abspath("../")
 MODEL_PATH = os.path.join(PROJECT_DIR, "NewMedicalImageEncryptionModel.pth")
 ENCODED_FEATURES_DIR = os.path.join(PROJECT_DIR, "encoded_features")
+
 os.makedirs(ENCODED_FEATURES_DIR, exist_ok=True)
+scripts_dir = os.path.join(FRONTEND_DIR, "scripts")
+templates_dir = os.path.join(FRONTEND_DIR, "templates")
+
+app.mount("/templates", StaticFiles(directory=templates_dir), name="templates")
+app.mount("/scripts", StaticFiles(directory=scripts_dir), name="scripts")
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -31,17 +38,17 @@ transform = transforms.Compose([transforms.Grayscale(), transforms.ToTensor()])
 # Serve homepage with links to encrypt/decrypt
 @app.get("/")
 async def serve_home():
-    return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
+    return FileResponse(os.path.join(templates_dir, "index.html"))
 
 # Serve encryption page
 @app.get("/encrypt/")
 async def serve_encrypt_page():
-    return FileResponse(os.path.join(FRONTEND_DIR, "encrypt.html"))
+    return FileResponse(os.path.join(templates_dir, "encrypt.html"))
 
 # Serve decryption page
 @app.get("/decrypt/")
 async def serve_decrypt_page():
-    return FileResponse(os.path.join(FRONTEND_DIR, "decrypt.html"))
+    return FileResponse(os.path.join(templates_dir, "decrypt.html"))
 
 def encrypt_image(image_tensor):
     with torch.no_grad():
