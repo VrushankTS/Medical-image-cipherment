@@ -16,3 +16,7 @@ async def serve_encrypt_page():
 @router.get("/decrypt/")
 async def serve_decrypt_page():
     return FileResponse(os.path.join(templates_dir, "decrypt.html"))
+
+@router.get("/reconstruct/")
+async def serve_reconstruct_page():
+    return FileResponse(os.path.join(templates_dir, "reconstruct.html"))

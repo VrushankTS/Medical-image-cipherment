@@ -6,3 +6,4 @@ matplotlib
 pillow
 git-lfs
 python-multipart
+scikit-learn
