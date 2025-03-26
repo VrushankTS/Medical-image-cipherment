@@ -1,0 +1,27 @@
+# Ignore Python virtual environment
+backend/env/
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Ignore model checkpoints and encoded features
+encoded_features/
+*.pth
+*.pt
+
+# Ignore IDE settings
+.vscode/
+*.code-workspace
+
+# Ignore environment files
+.env

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decrypt Image</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-6 bg-gray-900 flex flex-col items-center">
+    <h2 class="text-4xl font-bold dark:text-white">Decrypt Encoded File</h2>
+    <br>
+
+    <div id="alert-box" class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 hidden" role="alert">
+        <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span class="sr-only">Info</span>
+        <div>
+          <span class="font-medium">Info alert!</span> 
+          <span id="alert-message">Change a few things up and try submitting again.</span>
+        </div>
+    </div> 
+
+    <div id="fileSelector" class="flex items-center justify-center mt-6 w-1/2">
+        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                </svg>
+                <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <p class="text-xs text-gray-500">PT</p>
+            </div>
+            <input id="dropzone-file" type="file" class="hidden" onchange="previewImage()" />
+        </label>
+    </div>
+
+    <div id="imageGrid" class="grid grid-cols-2 gap-x-10 mx-auto justify-center mt-6 hidden">
+        <div class="flex flex-col items-center">
+            <p class="text-center text-gray-600 dark:text-gray-300 font-semibold">Original File</p>
+            <img id="originalImage" class="w-80 h-80 rounded-lg object-cover bg-gray-200" src="../images/tick.png" alt="Original Image">
+        </div>
+    
+        <div class="flex flex-col items-center">
+            <p class="text-center text-gray-600 dark:text-gray-300 font-semibold">Decrypted Image</p>
+            <img id="decryptedImage" class="w-80 h-80 rounded-lg object-cover bg-gray-200" src="https://flowbite.com/docs/images/examples/image-3@2x.jpg" alt="Encrypted Image">
+        </div>
+    </div>
+
+    <button onclick="uploadFile()" class="mt-4 px-6 py-2 text-base font-medium text-white bg-white border border-gray-200 rounded-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-200 dark:focus:text-white">
+        Decrypt
+    </button>
+
+    <a href="/" class="mt-6 text-blue-600 hover:underline">Go to Home</a>
+
+</body>
+<script src="/scripts/decrypt.js" defer></script>
+</html>
