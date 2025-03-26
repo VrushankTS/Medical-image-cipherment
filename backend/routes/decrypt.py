@@ -5,6 +5,8 @@ import io
 from torchvision import transforms
 from utils import decrypt
 from evals import device
+from PIL import Image
+import numpy as np
 
 router = APIRouter()
 
@@ -20,3 +22,5 @@ async def decrypt_image_api(file: UploadFile = File(...)):
     reconstructed_image.save(img_bytes, format="PNG")
     img_bytes.seek(0)
     return StreamingResponse(img_bytes, media_type="image/png")
+
+

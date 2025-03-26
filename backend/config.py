@@ -11,3 +11,4 @@ os.makedirs(ENCODED_FEATURES_DIR, exist_ok=True)
 
 scripts_dir = os.path.join(FRONTEND_DIR, "scripts")
 templates_dir = os.path.join(FRONTEND_DIR, "templates")
+images_dir = os.path.join(FRONTEND_DIR, "images")
