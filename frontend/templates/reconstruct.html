@@ -8,6 +8,10 @@
 </head>
 
 <body class="p-6 bg-gray-900 flex flex-col items-center">
+    <a href="/" class="absolute top-4 left-4">
+        <img src="../images/home_button.png" alt="home button" width="40" height="40">
+    </a>
+    
     <h2 class="text-4xl font-bold dark:text-white">Upload an Image for Reconstruction</h2>
 
     <div id="fileSelector" class="flex items-center justify-center mt-6 w-1/2">
@@ -60,8 +64,6 @@
             <div id="psnrBar" class="bg-green-600 h-4 rounded-full transition-all duration-500 ease-in-out" style="width: 0%"></div>
         </div>
     </div>  
-
-    <a href="/" class="mt-6 text-blue-600 hover:underline">Go to Home</a>
 
 </body>
 <script src="/scripts/reconstruct.js" defer></script>
