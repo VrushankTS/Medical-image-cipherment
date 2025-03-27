@@ -33,13 +33,6 @@ def plot_encoded_image(encoded):
     img_bytes.seek(0)
     return img_bytes
 
-# def reconstruct_image(image_tensor):
-#     """Reconstructs the image using the model."""
-#     with torch.no_grad():
-#         encoded = model.encoder(image_tensor)
-#         decoded = model.decoder(encoded)
-#     reconstructed = decoded.squeeze().cpu().numpy()
-#     return (reconstructed * 255).astype(np.uint8)
 
 def reconstruct_image(image_tensor):
     """Reconstructs the image using the model."""

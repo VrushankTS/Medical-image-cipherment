@@ -1,13 +1,13 @@
 from fastapi import APIRouter
 from fastapi.responses import FileResponse
-from config import templates_dir
+from config import *
 import os
 
 router = APIRouter()
 
 @router.get("/")
 async def serve_home():
-    return FileResponse(os.path.join(templates_dir, "index.html"))
+    return FileResponse(os.path.join(html_dir, "index.html"))
 
 @router.get("/encrypt/")
 async def serve_encrypt_page():
