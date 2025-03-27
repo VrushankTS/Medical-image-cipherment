@@ -5,7 +5,7 @@ import os
 import numpy as np
 from torchvision import transforms
 from config import ENCODED_FEATURES_DIR
-from evals import model, device
+from evals import model, new_model, device
 
 transform = transforms.Compose([transforms.Grayscale(), transforms.ToTensor()])
 
@@ -33,10 +33,17 @@ def plot_encoded_image(encoded):
     img_bytes.seek(0)
     return img_bytes
 
+# def reconstruct_image(image_tensor):
+#     """Reconstructs the image using the model."""
+#     with torch.no_grad():
+#         encoded = model.encoder(image_tensor)
+#         decoded = model.decoder(encoded)
+#     reconstructed = decoded.squeeze().cpu().numpy()
+#     return (reconstructed * 255).astype(np.uint8)
+
 def reconstruct_image(image_tensor):
     """Reconstructs the image using the model."""
     with torch.no_grad():
-        encoded = model.encoder(image_tensor)
-        decoded = model.decoder(encoded)
-    reconstructed = decoded.squeeze().cpu().numpy()
+        reconstructed, _, _, _, _ = new_model(image_tensor)
+    reconstructed = reconstructed.squeeze().cpu().numpy()
     return (reconstructed * 255).astype(np.uint8)

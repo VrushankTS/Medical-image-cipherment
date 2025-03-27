@@ -5,8 +5,6 @@ import io
 from torchvision import transforms
 from utils import decrypt
 from evals import device
-from PIL import Image
-import numpy as np
 
 router = APIRouter()
 

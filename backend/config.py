@@ -5,6 +5,7 @@ BACKEND_DIR = os.path.abspath(".")
 PROJECT_DIR = os.path.abspath("../")
 
 MODEL_PATH = os.path.join(PROJECT_DIR, "NewMedicalImageEncryptionModel.pth")
+NEW_MODEL_PATH = os.path.join(PROJECT_DIR, "medical_image_encryption.pth")
 ENCODED_FEATURES_DIR = os.path.join(PROJECT_DIR, "encoded_features")
 
 os.makedirs(ENCODED_FEATURES_DIR, exist_ok=True)
