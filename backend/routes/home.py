@@ -20,3 +20,11 @@ async def serve_decrypt_page():
 @router.get("/reconstruct/")
 async def serve_reconstruct_page():
     return FileResponse(os.path.join(templates_dir, "reconstruct.html"))
+
+@router.get("/about/")
+async def serve_about_page():
+    return FileResponse(os.path.join(html_dir, "about.html"))
+
+@router.get("/services/")
+async def serve_about_page():
+    return FileResponse(os.path.join(html_dir, "services.html"))
